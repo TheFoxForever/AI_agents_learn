@@ -16,6 +16,9 @@ class ReminderTab(QWidget):
         self.ai_agent = ai_agent
         self.reminders = []
         self.init_ui()
+        QTimer.singleShot(
+            0, self.update_reminder_list
+        )  # Defer schedule loading until after the UI is initialized
 
     def init_ui(self):
         layout = QVBoxLayout()

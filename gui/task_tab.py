@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
     QComboBox,
     QDateEdit,
 )
-from PyQt6.QtCore import Qt, QDate
+from PyQt6.QtCore import Qt, QDate, QTimer
 from ai_agent import AIAgent
 
 
@@ -17,6 +17,9 @@ class TaskTab(QWidget):
         super().__init__()
         self.ai_agent = ai_agent
         self.init_ui()
+        QTimer.singleShot(
+            0, self.refresh_tasks
+        )  # Defer task loading until after the UI is initialized
 
     def init_ui(self):
         layout = QVBoxLayout()
@@ -61,9 +64,6 @@ class TaskTab(QWidget):
         layout.addLayout(control_layout)
 
         self.setLayout(layout)
-
-        # Populate initial task list
-        self.refresh_tasks()
 
     def add_task(self):
         task_text = self.task_input.text()

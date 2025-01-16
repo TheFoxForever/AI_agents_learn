@@ -23,6 +23,8 @@ class TaskTool(BaseTool):
         elif "list tasks" in query.lower():
             # Retrieve and format tasks
             tasks = self.db.get_all_tasks()
+            if not tasks:
+                return "No tasks found. Your task list is empty."
             return "\n".join(
                 [
                     f"{task['id']}: {task['title']} (Priority: {task['priority']}, Status: {task['status']})"

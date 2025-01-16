@@ -18,7 +18,6 @@ class MainWindow(QMainWindow):
         self.init_ui()
 
     def init_ui(self) -> None:
-        print("init_ui called")
         self.setWindowTitle("AI Personal Assistant")
         self.setGeometry(50, 50, 600, 400)
 

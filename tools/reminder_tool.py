@@ -27,10 +27,14 @@ class ReminderTool(BaseTool):
             return "Reminder added successfully."
         elif "list reminders" in query.lower():
             reminders = self.db.get_all_reminders()
+            if not reminders:
+                return "No reminders found. Your reminder list is empty."
             return self.format_reminders(reminders)
         elif "check reminders" in query.lower():
             current_time = self.extract_current_time(query)
             due_reminders = self.db.get_due_reminders(current_time)
+            if not due_reminders:
+                return "No due reminders found."
             return self.format_reminders(due_reminders)
         else:
             return "I'm not sure how to handle that reminder request."

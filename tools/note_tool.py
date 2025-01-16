@@ -24,6 +24,8 @@ class NoteTool(BaseTool):
             return f"Summary: {summary}"
         elif "list notes" in query.lower():
             notes = self.db.get_all_notes()
+            if not notes:
+                return "No notes found. Your note list is empty."
             return self.format_notes(notes)
         else:
             return "I'm not sure how to handle that note request."

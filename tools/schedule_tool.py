@@ -22,6 +22,8 @@ class ScheduleTool(BaseTool):
         elif "list events" in query.lower():
             date = self.extract_date(query)
             events = self.db.get_events_by_date(date)
+            if not events:
+                return "No events found. Your event list is empty."
             return self.format_events(events)
         else:
             return "I'm not sure how to handle that schedule request."
